@@ -1,13 +1,12 @@
-package com.dinstone.maa.ma;
+package com.dinstone.maa.mb;
 
 import com.dinstone.maa.module.ModuleActivator;
 import com.dinstone.maa.module.ModuleContext;
-import com.google.inject.Injector;
 
-public class MaActivator implements ModuleActivator {
+public class MbActivator implements ModuleActivator {
 
     public void config(ModuleContext context) {
-       Injector i = context.getInjector();
+        
     }
 
     public void start() {

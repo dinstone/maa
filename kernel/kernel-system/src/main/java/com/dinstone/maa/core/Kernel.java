@@ -1,5 +1,8 @@
 package com.dinstone.maa.core;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import com.dinstone.maa.module.ModuleActivator;
 import com.dinstone.maa.module.ModuleContext;
 import com.dinstone.maa.module.ModuleDefinition;
@@ -13,6 +16,8 @@ public class Kernel {
     private final Injector injector;
     private ModuleContext moduleContext;
 
+    private List<ModuleActivator> activators = new CopyOnWriteArrayList<ModuleActivator>();
+
     public Kernel() {
         eventBus = new EventBus("GEB");
         injector = Guice.createInjector();
@@ -20,25 +25,40 @@ public class Kernel {
         moduleContext = new DefaultModuleContext(this);
     }
 
-    public void deployModule(ModuleDefinition definition) {
+    public void installModule(ModuleDefinition definition) {
         Class<?> ac = definition.getActivator();
         ModuleActivator ai = null;
         try {
             ai = (ModuleActivator) ac.newInstance();
             ai.config(moduleContext);
-            ai.start();
+            activators.add(ai);
         } catch (Exception e) {
             e.printStackTrace();
 
             if (ai != null) {
-                ai.destroy();
+                activators.remove(ai);
             }
         }
     }
 
     public void destroy() {
-        // TODO Auto-generated method stub
+        for (ModuleActivator activator : activators) {
+            activator.stop();
+        }
+    }
 
+    public void deployModule() {
+        for (ModuleActivator activator : activators) {
+            activator.start();
+        }
+    }
+
+    public EventBus getEventBus() {
+        return eventBus;
+    }
+
+    public Injector getInjector() {
+        return injector;
     }
 
 }

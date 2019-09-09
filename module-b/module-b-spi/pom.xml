@@ -6,4 +6,16 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>module-b-spi</artifactId>
+  <dependencies>
+      <dependency>
+          <groupId>com.dinstone.maa</groupId>
+          <artifactId>module-b-api</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+          <groupId>com.dinstone.maa</groupId>
+          <artifactId>kernel-api</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+  </dependencies>
 </project>

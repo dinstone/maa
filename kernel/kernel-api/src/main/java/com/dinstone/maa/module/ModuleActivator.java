@@ -8,5 +8,4 @@ public interface ModuleActivator {
 
     public void stop();
 
-    public void destroy();
 }
