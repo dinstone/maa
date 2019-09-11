@@ -6,7 +6,7 @@ import com.dinstone.maa.module.ModuleContext;
 public class MbActivator implements ModuleActivator {
 
     public void config(ModuleContext context) {
-        
+        context.getBinder().bind(MbService.class).to(MbServiceImpl.class);
     }
 
     public void start() {

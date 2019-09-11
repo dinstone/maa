@@ -1,18 +1,18 @@
 package com.dinstone.maa.core;
 
 import com.dinstone.maa.module.ModuleContext;
-import com.google.inject.Injector;
+import com.google.inject.Binder;
 
 public class DefaultModuleContext implements ModuleContext {
 
-    private Kernel kernel;
+    private Binder binder;
 
-    public DefaultModuleContext(Kernel kernel) {
-        this.kernel = kernel;
+    public DefaultModuleContext(Binder binder) {
+        this.binder = binder;
     }
 
-    public Injector getInjector() {
-        return kernel.getInjector();
+    public Binder getBinder() {
+        return binder;
     }
 
 }
