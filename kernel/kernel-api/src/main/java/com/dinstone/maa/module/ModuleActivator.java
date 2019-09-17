@@ -1,11 +1,14 @@
 package com.dinstone.maa.module;
 
+import com.google.inject.Binder;
+import com.google.inject.Injector;
+
 public interface ModuleActivator {
 
-    public void config(ModuleContext context);
+    public void config(Binder binder);
 
-    public void start();
+    public void start(Injector injector);
 
-    public void stop();
+    public void stop(Injector injector);
 
 }

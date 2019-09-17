@@ -45,15 +45,15 @@ public class Kernel {
             private ModuleContext moduleContext;
 
             public void configure(Binder binder) {
-                moduleContext = new DefaultModuleContext(binder);
+//                moduleContext = new DefaultModuleContext(binder);
                 for (ModuleActivator activator : activators) {
-                    activator.config(moduleContext);
+                    activator.config(binder);
                 }
             }
         });
 
         for (ModuleActivator activator : activators) {
-            activator.start();
+            activator.start(injector);
         }
     }
 
@@ -63,7 +63,7 @@ public class Kernel {
 
     public void destroy() {
         for (ModuleActivator activator : activators) {
-            activator.stop();
+            activator.stop(injector);
         }
     }
 
